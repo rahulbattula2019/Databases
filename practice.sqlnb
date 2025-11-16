@@ -1,0 +1,31 @@
+cells:
+  - kind: 2
+    value: |-
+      CREATE TABLE employees (
+          id NUMBER PRIMARY KEY,
+          name VARCHAR(20),
+          salary NUMBER
+      );
+    languageId: oracle-sql
+  - kind: 2
+    value: select table_name from user_tables;
+    languageId: oracle-sql
+  - kind: 2
+    value: INSERT INTO EMPLOYEES VALUES (101, 'naruto', 20000);
+    languageId: oracle-sql
+  - kind: 2
+    value: |-
+      INSERT ALL
+          INTO EMPLOYEES VALUES (102, 'sasuke', 22000)
+          INTO EMPLOYEES VALUES (103, 'sakura', 15000)
+      SELECT * FROM DUAL;
+    languageId: oracle-sql
+  - kind: 2
+    value: select * from EMPLOYEES;
+    languageId: oracle-sql
+  - kind: 2
+    value: DESC EMPLOYEES;
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
