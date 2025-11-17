@@ -27,5 +27,17 @@ cells:
     value: DESC EMPLOYEES;
     languageId: oracle-sql
   - kind: 2
+    value: DROP TABLE EMPLOYEES;
+    languageId: oracle-sql
+  - kind: 2
+    value: |-
+      DECLARE
+          x NUMBER:=10;
+      BEGIN
+          DBMS_OUTPUT.PUT_LINE('Your number is ' || x);
+      END;
+      /
+    languageId: oracle-sql
+  - kind: 2
     value: ""
     languageId: oracle-sql

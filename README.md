@@ -39,14 +39,18 @@
    ```bash
    docker logs oracle-xe | grep "DATABASE IS READY"
    ```
+6. Make sure to run this command everytime after restarting the session:
+   ```bash
+      docker start oracle-xe
+   ```
 
-6. Enter the Oracle container:
+7. Enter the Oracle container:
 
    ```bash
    docker exec -it oracle-xe bash
    ```
 
-7. Connect to Oracle using SQL\*Plus:
+8. Connect to Oracle using SQL\*Plus:
 
    ```bash
    sqlplus system/4869@XEPDB1
