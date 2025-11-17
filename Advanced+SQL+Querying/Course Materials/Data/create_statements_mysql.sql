@@ -1,44 +1,47 @@
--- SECTION 1: SQL Basics Review
+-- Specify the schema
+DROP SCHEMA IF EXISTS maven_advanced_sql;
+CREATE SCHEMA maven_advanced_sql;
+USE maven_advanced_sql;
 
+-- SECTION 1: SQL Basics Review
+SHOW TABLES;
+SHOW databases;
 --
 -- Table structure for table `students`
 --
 
 CREATE TABLE students (
-    id            NUMBER PRIMARY KEY,
-    student_name  VARCHAR2(50),
-    grade_level   NUMBER,
-    gpa           NUMBER(2,1),
-    school_lunch  VARCHAR2(3),
-    birthday      DATE,
-    email         VARCHAR2(100)
+    id INT PRIMARY KEY,
+    student_name VARCHAR(50),
+    grade_level INT,
+    gpa DECIMAL(2, 1),
+    school_lunch VARCHAR(3),
+    birthday DATE,
+    email VARCHAR(100)
 );
-
 
 --
 -- Insert data into table `students`
 --
-INSERT ALL 
-INTO STUDENTS VALUES (1, 'Abby Johnson', 10, 3.1, 'Yes', DATE '2008-05-14', 'abby.johnson@mavenhighschool.com')
-INTO STUDENTS VALUES (2, 'Bob Smith', 11, 3.1, 'No', DATE '2007-09-30', 'bob.smith@mavenhighschool.com')
-INTO STUDENTS VALUES (3, 'Catherine Davis', 12, 3.6, 'Yes', DATE '2006-11-21', 'catherine.davis@mavenhighschool.com')
-INTO STUDENTS VALUES (4, 'Daniel Brown', 9, 3.5, 'Yes', DATE '2009-03-10', 'daniel.brown@mavenhighschool.edu')
-INTO STUDENTS VALUES (5, 'Eva Martinez', 10, 2.7, 'No', DATE '2008-02-05', 'eva.martinez@mavenhighschool.com')
-INTO STUDENTS VALUES (6, 'Frank Wilson', 11, 3.2, 'No', DATE '2007-07-17', 'frank.wilson@mavenhighschool.com')
-INTO STUDENTS VALUES (7, 'Grace Lee', 12, 3.0, 'Yes', DATE '2006-12-02', 'grace.lee@mavenhighschool.com')
-INTO STUDENTS VALUES (8, 'Henry Taylor', 9, 3.0, 'Yes', DATE '2009-06-08', NULL)
-INTO STUDENTS VALUES (9, 'Isabella Moore', 10, 2.8, 'Yes', DATE '2008-01-19', 'isabella.moore@mavenhighschool.com')
-INTO STUDENTS VALUES (10, 'Jack Thompson', 11, 2.9, 'Yes', DATE '2007-04-25', 'jack.thompson@mavenhighschool.com')
-INTO STUDENTS VALUES (11, 'Karen White', 9, 3.4, 'No', DATE '2009-09-10', 'karen.white@mavenhighschool.edu')
-INTO STUDENTS VALUES (12, 'Liam Green', 10, 4.0, 'Yes', DATE '2008-08-03', 'liam.green@mavenhighschool.com')
-INTO STUDENTS VALUES (13, 'Mia Harris', 11, 3.0, 'No', DATE '2007-02-28', 'mia.harris@mavenhighschool.com')
-INTO STUDENTS VALUES (14, 'Noah Scott', 12, 3.3, 'No', DATE '2006-10-15', 'noah.scott@mavenparkdistrict.com')
-INTO STUDENTS VALUES (15, 'Olivia Adams', 9, 3.7, 'Yes', DATE '2009-12-11', 'olivia.adams@mavenhighschool.edu')
-INTO STUDENTS VALUES (16, 'Peter Park', 12, 2.9, 'Yes', DATE '2006-02-11', 'peter.park@mavenhighschool.com')
-INTO STUDENTS VALUES (17, 'Noah Scott', 12, 3.3, 'No', DATE '2006-10-15', 'noah.scott@mavenhighschool.com')
-SELECT 1 FROM dual;
 
-SELECT * FROM students;
+INSERT INTO students (id, student_name,  grade_level, gpa, school_lunch, birthday, email) VALUES
+(1, 'Abby Johnson', 10, 3.1, 'Yes', '2008-05-14', 'abby.johnson@mavenhighschool.com'),
+(2, 'Bob Smith', 11, 3.1, 'No', '2007-09-30', 'bob.smith@mavenhighschool.com'),
+(3, 'Catherine Davis', 12, 3.6, 'Yes', '2006-11-21', 'catherine.davis@mavenhighschool.com'),
+(4, 'Daniel Brown', 9, 3.5, 'Yes', '2009-03-10', 'daniel.brown@mavenhighschool.edu'),
+(5, 'Eva Martinez', 10, 2.7, 'No', '2008-02-05', 'eva.martinez@mavenhighschool.com'),
+(6, 'Frank Wilson', 11, 3.2, 'No', '2007-07-17', 'frank.wilson@mavenhighschool.com'),
+(7, 'Grace Lee', 12, 3.0, 'Yes', '2006-12-02', 'grace.lee@mavenhighschool.com'),
+(8, 'Henry Taylor', 9, 3.0, 'Yes', '2009-06-08', NULL),
+(9, 'Isabella Moore', 10, 2.8, 'Yes', '2008-01-19', 'isabella.moore@mavenhighschool.com'),
+(10, 'Jack Thompson', 11, 2.9, 'Yes', '2007-04-25', 'jack.thompson@mavenhighschool.com'),
+(11, 'Karen White', 9, 3.4, 'No', '2009-09-10', 'karen.white@mavenhighschool.edu'),
+(12, 'Liam Green', 10, 4.0, 'Yes', '2008-08-03', 'liam.green@mavenhighschool.com'),
+(13, 'Mia Harris', 11, 3.0, 'No', '2007-02-28', 'mia.harris@mavenhighschool.com'),
+(14, 'Noah Scott', 12, 3.3, 'No', '2006-10-15', 'noah.scott@mavenparkdistrict.com'),
+(15, 'Olivia Adams', 9, 3.7, 'Yes', '2009-12-11', 'olivia.adams@mavenhighschool.edu'),
+(16, 'Peter Park', 12, 2.9, 'Yes', '2006-02-11', 'peter.park@mavenhighschool.com'),
+(17, 'Noah Scott', 12, 3.3, 'No', '2006-10-15', 'noah.scott@mavenhighschool.com');
 
 -- SECTIONS 2-6: Advanced SQL Concepts
 
@@ -47,19 +50,18 @@ SELECT * FROM students;
 --
 
 CREATE TABLE happiness_scores (
-    year                           NUMBER,
-    country                        VARCHAR2(100),
-    region                         VARCHAR2(100),
-    happiness_score                NUMBER(5,3),
-    gdp_per_capita                 NUMBER(10,5),
-    social_support                 NUMBER(10,5),
-    healthy_life_expectancy        NUMBER(10,5),
-    freedom_to_make_life_choices   NUMBER(10,5),
-    generosity                     NUMBER(10,5),
-    perceptions_of_corruption      NUMBER(10,5),
+    year INT,
+    country VARCHAR(100),
+    region VARCHAR(100),
+    happiness_score DECIMAL(5,3),
+    gdp_per_capita DECIMAL(10,5),
+    social_support DECIMAL(10,5),
+    healthy_life_expectancy DECIMAL(10,5),
+    freedom_to_make_life_choices DECIMAL(10,5),
+    generosity DECIMAL(10,5),
+    perceptions_of_corruption DECIMAL(10,5),
     PRIMARY KEY (year, country)
 );
-
 
 --
 -- Table structure for table `happiness_scores_current`
@@ -309,9 +311,9 @@ INSERT INTO happiness_scores (year, country, region, happiness_score,
 (2016, 'Costa Rica', 'Latin America and Caribbean', 7.087, 1.06879, 1.02152, 0.76146, 0.55225, 0.22553, 0.10547),
 (2016, 'Croatia', 'Central and Eastern Europe', 5.488, 1.18649, 0.60809, 0.70524, 0.23907, 0.18434, 0.04002),
 (2016, 'Cyprus', 'Western Europe', 5.546, 1.31857, 0.70697, 0.8488, 0.29507, 0.27906, 0.05228),
-(2016, 'Dominican Republic', 'Latin America and Caribbean', 5.155, 1.02787, 0.99496, 0.57669, 0.52259, 0.21286, 0.12372),
 (2016, 'Czech Republic', 'Central and Eastern Europe', 6.596, 1.30915, 1.00793, 0.76376, 0.41418, 0.09929, 0.03986),
 (2016, 'Denmark', 'Western Europe', 7.526, 1.44178, 1.16374, 0.79504, 0.57941, 0.36171, 0.44453),
+(2016, 'Dominican Republic', 'Latin America and Caribbean', 5.155, 1.02787, 0.99496, 0.57669, 0.52259, 0.21286, 0.12372),
 (2016, 'Ecuador', 'Latin America and Caribbean', 5.976, 0.97306, 0.85974, 0.68613, 0.4027, 0.10074, 0.18037),
 (2016, 'Egypt', 'Middle East and North Africa', 4.362, 0.95395, 0.49813, 0.52116, 0.18847, 0.12706, 0.10393),
 (2016, 'El Salvador', 'Latin America and Caribbean', 6.068, 0.8737, 0.80975, 0.596, 0.37269, 0.08877, 0.10613),
